@@ -8,13 +8,15 @@ use App\Models\User;
 use App\Models\WorkStations;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class CompanyController extends JwtAuthController
 {
     private Company $model;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->model = new Company();
     }
@@ -120,7 +122,7 @@ class CompanyController extends JwtAuthController
 
         return response()->json($company);
     }
-    
+
     public function updateLogoImage(Request $request)
     {
         Log::info("Starting updateLogoImage");

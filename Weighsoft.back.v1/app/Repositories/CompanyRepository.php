@@ -6,12 +6,12 @@ use App\Models\Company;
 
 class CompanyRepository
 {
-    public function getAll()
+    public function all()
     {
         return Company::all();
     }
 
-    public function findById($id)
+    public function find($id)
     {
         return Company::find($id);
     }
@@ -23,15 +23,23 @@ class CompanyRepository
 
     public function update($id, array $data)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::find($id);
 
-        $company->update($data);
+        if ($company) {
+            $company->update($data);
+        }
 
         return $company;
     }
 
     public function delete($id)
     {
-        return Company::destroy($id);
+        $company = Company::find($id);
+
+        if ($company) {
+            $company->delete();
+        }
+
+        return $company;
     }
 }
